@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Diksha's Portfolio</title>
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="logo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">Diksha.</div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Hi, I'm <span class="highlight">Diksha Sirohi</span></h1>
+            <h3>Aspiring Developer | Data Science Enthusiast</h3>
+            <p>
+                Passionate about creating data-driven solutions and web applications. 
+                Currently learning advanced web development & DSA for problem solving.
+            </p>
+            <div class="buttons">
+                <a href="#contact" class="btn primary">Hire Me</a>
+                <a href="https://www.linkedin.com/in/diksha-sirohi-b8528228b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" class="btn secondary">Let's Talk</a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="hero-img">
+            <img src="photo.jpg" alt="Diksha Sirohi">
+        </div>
+    </section>
+
+    <section id="about" class="content">
+        <h2>About Me</h2>
+        <p>Curiosity and creativity drive my learning journey. I have worked on projects ranging from data-driven
+        applications to AI-powered study planning tools. Whether it is brainstorming solutions with a team or
+        independently exploring new technologies, I enjoy the process of learning by building.<br><br>
+        I also actively engage in leadership roles:<br>
+    <ul>
+        <li>Vice President of GenAI (College AI Society)</li>
+        <li> Elected Class Representative for academic excellence</li>
+        <li>Team Leader in multiple academic and event-based projects</li>
+    </ul><br>
+    Beyond academics, I love traveling, gaming, and watching movies, as I believe creativity often sparks outside
+    the screen too.<br>
+    Looking for: Exciting internship opportunities to gain industry experience and contribute to impactful projects.</p>
+    </section>
+
+    <section id="skills" class="content">
+        <h2>Skills</h2>
+        <ul>
+        <li>Programming & Technologies: HTML, C (DSA), Python (basics), GitHub</li>
+        <li>Soft Skills: Leadership, Team Collaboration, Event Coordination, Communication</li>
+        <li>Certifications: Infosys (Foundational Certifications)</li>
+    </ul>
+
+
+    </section>
+
+    <section id="projects" class="content">
+        <h2>Projects</h2>
+       <ol>
+        <li><b>Movie Database System</b><br>
+            A structured movie information system that includes:
+            <ul>
+                <li><b>Features</b>: Genre-wise categorization, cast & crew details, ratings & reviews management</li>
+                <li><b>Tech Stack</b>: SQL, API key, Full stack</li>
+            </ul>
+        </li><br>
+        <li>
+            <b>AI-Based Study Planner</b><br>A smart application that generates a personalized study schedule based on
+            available time, deadlines, and exam dates.
+            <ul>
+                <li>
+                    <b>Features</b>:Task prioritization, AI-powered recommendations, customizable interface
+                </li>
+                <li><b>Tech Stack</b>: Flask, Python, basic AI algorithms</li>
+            </ul>
+        </li><br>
+        <li><b>Vehicle Breakdown Road Assistance</b><br>Currently working on it.</li>
+    </ol>
+    </section>
+
+
+<section id="contact" class="contact-box">
+    <h2>Contact Me</h2>
+    <form action="https://formspree.io/f/mdkdwrop" method="POST" id="contact-form">
+        <div class="form-group">
+            <input type="text" name="name" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+            <input type="email" name="email" placeholder="Your Email" required>
+        </div>
+        <div class="form-group">
+            <input type="text" name="subject" placeholder="Subject" required>
+        </div>
+        <div class="form-group">
+            <textarea name="message" placeholder="Your Message" required></textarea>
+        </div>
+        <button type="submit" class="btn primary">Send Message</button>
+        <p id="form-status" class="form-status"></p>
+    </form>
+</section>
+
+
+<script>
+document.getElementById("contact-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+
+    const response = await fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+    });
+
+    const status = document.getElementById("form-status");
+    if (response.ok) {
+        status.innerHTML = "Message sent successfully!";
+        status.style.color = "#1abc9c";
+        form.reset();
+    } else {
+        status.innerHTML = "Oops! There was a problem. Please try again.";
+        status.style.color = "#e74c3c";
+    }
+});
+</script>
+
+
+    <footer id="contact">
+        <p style="text-align: center;">Open to Internships & Collaborations | 
+            <a href="https://www.linkedin.com/in/diksha-sirohi-b8528228b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">LinkedIn</a> | <a href="https://github.com/DikshaSirohi">GitHub</a>
+        </p>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>
