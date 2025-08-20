@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Calculator</title>
+<style>
+  :root{
+  --bg1:#7bd3ff;
+  --bg2:#b892ff;
+  --card:#ffffffcc;
+  --text:#1b1b1b;
+  --accent:#6a5cff;
+  --accent-2:#ff7bbb;
+  --danger:#ff5d6c;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  background: radial-gradient(1200px 800px at 80% -10%, var(--bg2), transparent 60%),
+              radial-gradient(1200px 800px at -10% 110%, var(--bg1), transparent 60%),
+              linear-gradient(120deg, #fef6ff, #e9fbff);
+  font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+.calculator{
+  width:min(92vw, 360px);
+  padding:18px;
+  border-radius:24px;
+  background:var(--card);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 12px 30px rgba(87, 60, 255, .18),
+    0 2px 0 rgba(255,255,255,.6) inset;
+  position:relative;
+  overflow:hidden;
+}
+
+.title{
+  display:flex; align-items:center; gap:10px;
+  margin:0 0 10px; color:var(--text);
+  letter-spacing:.5px;
+}
+.title .dot{
+  width:10px; height:10px; border-radius:50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow:0 0 10px var(--accent-2);
+}
+
+#result{
+  display:block;
+  width:calc(100% - 20px);
+  margin:0 auto 12px auto;
+  border:none;
+  border-radius:16px;
+  padding:14px 16px;
+  text-align:right;
+  font-size:28px;
+  color:var(--text);
+  background:#ffffffee;
+  box-shadow:inset 0 2px 8px rgba(0,0,0,.08);
+}
+
+
+.buttons{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:12px;
+}
+
+button{
+  border:none;
+  border-radius:16px;
+  padding:14px 0;
+  font-size:20px;
+  font-weight:700;
+  color:#1f1f1f;
+  background:#fff;
+  cursor:pointer;
+  box-shadow:
+    0 8px 0 rgba(31,31,31,.12),
+    0 2px 0 rgba(255,255,255,.9) inset;
+  transition: transform .05s ease, box-shadow .05s ease, filter .2s ease;
+  user-select:none;
+}
+button:hover{ filter:brightness(1.05); }
+button:active{
+  transform: translateY(2px);
+  box-shadow:
+    0 5px 0 rgba(31,31,31,.12),
+    0 1px 0 rgba(255,255,255,.9) inset;
+}
+
+.op{
+  background: linear-gradient(180deg, #fef, #ffd4ec);
+}
+.op2{
+  background: linear-gradient(180deg, #eef, #d9d3ff);
+}
+.eq{
+  background: linear-gradient(180deg, #d9ffe4, #b7ffd0);
+}
+.clear{
+  background: linear-gradient(180deg, #ffe3e6, #ffc6cc);
+  color:#7a0010;
+  grid-column: span 4; 
+}
+
+.badge{
+  position:absolute; right:16px; top:-10px;
+  background:#000000cc; color:#fff; font-size:12px; padding:6px 10px;
+  border-radius:999px;
+}
+
+</style>
+</head>
+<body>
+  <div class="calculator">
+    <h3 class="title"><span class="dot"></span>Calculator</h3>
+    <input type="text" id="result" placeholder="0" disabled />
+
+    <div class="buttons">
+      <button onclick="appendValue('7')">7</button>
+      <button onclick="appendValue('8')">8</button>
+      <button onclick="appendValue('9')">9</button>
+      <button class="op2" onclick="appendValue('/')">÷</button>
+
+      <button onclick="appendValue('4')">4</button>
+      <button onclick="appendValue('5')">5</button>
+      <button onclick="appendValue('6')">6</button>
+      <button class="op2" onclick="appendValue('*')">×</button>
+
+      <button onclick="appendValue('1')">1</button>
+      <button onclick="appendValue('2')">2</button>
+      <button onclick="appendValue('3')">3</button>
+      <button class="op2" onclick="appendValue('-')">−</button>
+
+      <button onclick="appendValue('0')">0</button>
+      <button onclick="appendValue('.')">.</button>
+      <button class="eq" onclick="calculate()">=</button>
+      <button class="op" onclick="appendValue('+')">+</button>
+
+      <button class="clear" onclick="clearResult()">CLEAR</button>
+    </div>
+  </div>
+
+<script>
+  function appendValue(value){
+    const el = document.getElementById('result');
+    const ops = ['+','-','*','/'];
+    const last = el.value.slice(-1);
+    if(ops.includes(last) && ops.includes(value)) return;
+    el.value += value;
+  }
+
+  function calculate(){
+    const el = document.getElementById('result');
+    if(!el.value) return;
+    try{
+      el.value = eval(el.value);
+    }catch(e){
+      el.value = 'Error';
+      setTimeout(() => el.value = '', 800);
+    }
+  }
+
+  function clearResult(){
+    document.getElementById('result').value = '';
+  }
+</script>
+
+
+</body>
+</html>
